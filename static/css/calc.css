@@ -75,11 +75,11 @@ table button:active {
     opacity: 1;
   }
   25% {
-    -webkit-transform: translateY(-30px) rotate(-20deg);
+    -webkit-transform: translateY(-30px) rotate(-360deg);
     opacity: 0.5;
   }
   75% {
-    -webkit-transform: translateY(-30px) rotate(20deg);
+    -webkit-transform: translateY(-30px) rotate(360deg);
     opacity: 0.5;
   }
 }
