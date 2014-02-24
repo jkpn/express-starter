@@ -2,23 +2,27 @@ alert('Welcome to my page that is fuleth of stuffeth'); // edit me!
 
 // Problem 1 (Say Hello!) ---------------------------------------------------
 $('#say_hello').click(function() {
-  alert('Tada BIATCHES')
+  alert('Hello World!')
 });
 
 
 // Problem 2 (Houdini) ------------------------------------------------------
 $('#disappear').click(function() {
-  //WRITE CODE HERE
+  $('#houdini_text').hide();
 });
 
 $('#reappear').click(function() {
-  //WRITE CODE HERE
+  $('#houdini_text').show();
 });
 
 
 // Problem 3 (Tickle Me Pink) -----------------------------------------------
-// WRITE CODE HERE
+$('#tickle').click(function() {
+  $('#tickled_text').css('color','Pink')
+});
 
 
 // Problem 4 (Greet Me) -----------------------------------------------------
-// WRITE CODE HERE
+$('#Greet').click(function() {
+	$('#my_name').val()
+});
