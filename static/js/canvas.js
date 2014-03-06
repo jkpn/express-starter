@@ -18,4 +18,28 @@ $('#p2').click(function() {
     context.strokeRect(20, 20, 200, 200);
 });
 
+$('#p3').click(function() {
+    context.beginPath();
+    	//context.moveTo(20,20);
+    	//context.lineTo(40,40);
+    	context.arc(100,100,50,0,Math.PI);
+    context.closePath();
+    context.stroke();
+});
+
+$('#p4').click(function() {
+    context.beginPath();
+    	context.arc(100,100,50,-Math.PI,Math.PI);
+    context.closePath();
+    context.stroke();
+});
+
+$('#p5').click(function() {
+    context.beginPath();
+    	context.moveTo(20,20);
+    	context.lineTo(200,200);
+    context.closePath();
+    context.stroke();
+});
+
 });
