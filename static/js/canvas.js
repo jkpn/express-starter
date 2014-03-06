@@ -42,4 +42,27 @@ $('#p5').click(function() {
     context.stroke();
 });
 
+$('#p6').click(function() {
+    context.strokeStyle='green';
+    	context.strokeRect(20, 20, 200, 100);
+    context.strokeStyle='black';
+
+});
+
+$('#p7').click(function() {
+	context.fillStyle='red';
+    	context.beginPath();
+    		context.arc(100,100,50,-Math.PI,Math.PI);
+    	context.closePath();
+    context.fill();
+});
+
+$('#p8').click(function() {
+    context.strokeStyle='blue';
+    	context.strokeRect(20, 20, 200, 100);
+    context.fillStyle='yellow';
+    	context.fillRect(20, 20, 200, 100);
+    context.strokeStyle='black';
+
+});
 });
