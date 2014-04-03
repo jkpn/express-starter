@@ -6,9 +6,11 @@ $(document).ready(function() {
   var height = canvas.height;
 
   //PUT STUFF HERE
-  var ball1 = {x:20, y:20, radius:30, color:"red"}
+  var ball1 = {x:20, y:20, radius:20, color:"red", vx:5, vy:5}
   var x = 20;
   var y = 20;
+  var vx = 5;
+  var vy = 5;
   //run an iteration of the game
   var updateGame = function() {
  
@@ -21,8 +23,21 @@ $(document).ready(function() {
     context.closePath();
     context.fill();
 
-     ball1.x = ball1.x + 5;
-     ball1.y = ball1.y + 5;
+     ball1.x = ball1.x + vx;
+     ball1.y = ball1.y + vy;
+
+     if (ball1.x === width) {
+      vx = -5;
+     }
+     if (ball1.y === height) {
+      vy = -5;
+     }
+     if (ball1.x === 0) {
+      vx = 5
+     }
+     if (ball1.y === 0) {
+      vy = 5
+     }
      setTimeout(updateGame, 10);
   };
 
