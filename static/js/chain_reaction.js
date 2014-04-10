@@ -6,41 +6,45 @@ $(document).ready(function() {
   var height = canvas.height;
 
   // PUT STUFF HERE
-  var balls = []
+
+  var numBalls = 3;
+
+  var balls = [];
   
-  var b0 = {x:20, y:20, radius:10, color:"red", vx:5, vy:5}
-
-  var b1 = {x:45, y:45, radius:20, color:"black", vx:5, vy:5}
-
-  var b2 = {x:85, y:85, radius:30, color:"blue", vx:5, vy:5}
-   
-balls.push(b0)
-balls.push(b1)
-balls.push(b2)
-
+  for (var i = 0; i < numBalls; i++) {
+    a = {x: width*Math.random(), y: height*Math.random(), radius: 20, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5};
+    balls.push(a);
+  }
 
   // Run an interation of the game
   var updateGame = function() {
-// PUT STUFF HERE
-for (var i = 0; i < balls.length; i++) {
-
-  context.fillStyle=balls[i].color;
-    context.beginPath();
-    context.arc(balls[i].x,balls[i].y,balls[i].radius,-Math.PI,Math.PI);
-    context.closePath();
-    context.fill();
-}
-    //context.fillStyle=b1.color;
-    //context.beginPath();
-    //context.arc(b1.x,b1.y,b1.radius,-Math.PI,Math.PI);
-    //context.closePath();
-    //context.fill();
-
-    //context.fillStyle=b2.color;
-    //context.beginPath();
-    //context.arc(b2.x,b2.y,b2.radius,-Math.PI,Math.PI);
-    //context.closePath();
-    //context.fill();
+    for (var i = 0; i < balls.length; i++) {
+      balls[i].x = balls[i].x + balls[i].vx;
+      balls[i].y = balls[i].y + balls[i].vy;
+      if (balls[i].x >= width) {
+        balls[i].vx = -5;
+      }
+      if (balls[i].y >= height) {
+        balls[i].vy = -5;
+      }
+      if (balls[i].x <= 0) {
+        balls[i].vx = 5;
+      }
+      if (balls[i].y <= 0) {
+        balls[i].vy = 5;
+      }
+    }
+    context.fillStyle='black';
+    context.fillRect(0, 0, 800, 800);
+    for (var c = 0; c < balls.length; c++) {
+      context.beginPath();
+      context.fillStyle='blue';
+      context.arc(balls[c].x, balls[c].y, balls[c].radius,0,2*Math.PI);
+      context.closePath();
+      context.stroke();
+      context.fill();
+    }
+    requestAnimationFrame(updateGame);
   };
 
   // Handle a canvas click event
