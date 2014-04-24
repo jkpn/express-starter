@@ -29,13 +29,18 @@ $(document).ready(function() {
           var dist =  Math.sqrt(xdiff * xdiff + ydiff * ydiff);
           if (dist < balls[i].radius + reactions[j].radius){
           collided = true;
-        if (collided === true) {
-          balls.splice(i,1);
-          i--;
         }
-                }
-
       }
+          if (collided === true) {
+          var new_reaction={x: balls[i].x, y: balls[i].y, radius: 1};
+          reactions.push(new_reaction);
+          balls.splice(i,1);
+          if (i>0) {
+            i--;}
+        }
+                
+
+      
       }
 
     context.fillStyle='black';
