@@ -20,6 +20,10 @@ $(document).ready(function() {
 
   // Run an interation of the game
   var updateGame = function() {
+
+    context.fillStyle='black';
+    context.fillRect(0, 0, 800, 800);
+
     for (var i = 0; i < balls.length; i++) {
       balls[i].x = balls[i].x + balls[i].vx;
       balls[i].y = balls[i].y + balls[i].vy;
@@ -37,8 +41,6 @@ $(document).ready(function() {
       }
     }
 
-    context.fillStyle='black';
-    context.fillRect(0, 0, 800, 800);
     for (var c = 0; c < balls.length; c++) {
       context.beginPath();
       context.fillStyle='blue';
@@ -55,7 +57,13 @@ $(document).ready(function() {
       context.stroke();
       context.fill();
     }
-    requestAnimationFrame(updateGame);
+    requestAnimationFrame(updateGame); 
+    for(var i=0; i < reactions.length; i++) {
+      if (reactions[i].radius < 30) {
+         reactions[i].radius++;
+    }
+  }
+
   };
 
   // Handle a canvas click event
@@ -64,7 +72,7 @@ $(document).ready(function() {
     var x = e.pageX - $(this).offset().left;
     var y = e.pageY - $(this).offset().top;
     
-    z = {x: x, y: y, radius: 30, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5};
+    z = {x: x, y: y, radius: 0, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5};
     reactions.push(z);
 
   
