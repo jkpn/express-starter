@@ -10,6 +10,8 @@ $(document).ready(function() {
   var numBalls = 3;
 
   var balls = [];
+
+  var reactions = [];
   
   for (var i = 0; i < numBalls; i++) {
     a = {x: width*Math.random(), y: height*Math.random(), radius: 20, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5};
@@ -34,12 +36,21 @@ $(document).ready(function() {
         balls[i].vy = 5;
       }
     }
+
     context.fillStyle='black';
     context.fillRect(0, 0, 800, 800);
     for (var c = 0; c < balls.length; c++) {
       context.beginPath();
       context.fillStyle='blue';
       context.arc(balls[c].x, balls[c].y, balls[c].radius,0,2*Math.PI);
+      context.closePath();
+      context.stroke();
+      context.fill();
+    }
+    for (var c = 0; c < reactions.length; c++) {
+      context.beginPath();
+      context.fillStyle='blue';
+      context.arc (reactions[c].x, reactions[c].y, reactions[c].radius,0,2*Math.PI);
       context.closePath();
       context.stroke();
       context.fill();
@@ -53,8 +64,9 @@ $(document).ready(function() {
     var x = e.pageX - $(this).offset().left;
     var y = e.pageY - $(this).offset().top;
     
-    z = {x: x, y: y, radius: 20, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5};
-    balls.push(z);
+    z = {x: x, y: y, radius: 30, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5};
+    reactions.push(z);
+
   
   });
 
