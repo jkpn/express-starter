@@ -7,7 +7,7 @@ $(document).ready(function() {
 
   // PUT STUFF HERE
 
-  var numBalls = 3;
+  var numBalls = 5;
 
   var balls = [];
 
@@ -32,7 +32,7 @@ $(document).ready(function() {
         }
       }
           if (collided === true) {
-          var new_reaction={x: balls[i].x, y: balls[i].y, radius: 1};
+          var new_reaction={x: balls[i].x, y: balls[i].y, radius: 1, timer: 0};
           reactions.push(new_reaction);
           balls.splice(i,1);
           if (i>0) {
@@ -81,8 +81,16 @@ $(document).ready(function() {
     }
     requestAnimationFrame(updateGame); 
     for(var i=0; i < reactions.length; i++) {
-      if (reactions[i].radius < 30) {
+      reactions[i].timer++;
+      if (reactions[i].timer > 200) {
+          reactions[i].radius--;
+      }
+      else if (reactions[i].radius < 30) {
          reactions[i].radius++;
+      }
+      if (reactions[i].radius === 0) {
+          reactions.splice(i,1);
+          i--;
       }
     }
 
@@ -94,7 +102,7 @@ $(document).ready(function() {
     var x = e.pageX - $(this).offset().left;
     var y = e.pageY - $(this).offset().top;
     
-    z = {x: x, y: y, radius: 0, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5};
+    z = {x: x, y: y, radius: 0, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5, timer: 0};
     reactions.push(z);
 
   
