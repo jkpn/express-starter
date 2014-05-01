@@ -16,6 +16,10 @@ $(document).ready(function() {
   var reacting = false;
 
   var numReacted = 0
+
+  var gamestate = "menu"
+
+  var menuText = "Click to play!"
   
   for (var i = 0; i < numBalls; i++) {
     a = {x: width*Math.random(), y: height*Math.random(), radius: 20, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5};
@@ -25,6 +29,12 @@ $(document).ready(function() {
   // Run an interation of the game
   var updateGame = function() {
 
+    if (gamestate === "menu") {
+    context.fillStyle = "lime";
+    context.font = "50px Arial"
+    context.fillText( menuText, 20, 300);
+  }
+    else if ( gamestate === "playing") {
     for (var i = 0; i < balls.length; i++) {
       var collided = false
         for (var j = 0; j < reactions.length; j++) {
@@ -84,6 +94,12 @@ $(document).ready(function() {
       context.stroke();
       context.fill();
     }
+    if (reacting === true) {
+      if (reactions.length === 0) {
+        menuText = ("Game over! you reacted " + numReacted + " balls!")
+        gamestate = "menu"
+    }}
+    }
     requestAnimationFrame(updateGame); 
     for(var i=0; i < reactions.length; i++) {
       reactions[i].timer++;
@@ -101,10 +117,21 @@ $(document).ready(function() {
     context.fillStyle = "lime";
     context.font = "20px Arial"
     context.fillText("Reactions:" + numReacted, 10, 30);
+
   };
 
   // Handle a canvas click event
   $('#game_canvas').click(function(e) {
+    if (gamestate === "menu") {
+      reacting = false
+      numReacted = 0
+      for (var i = 0; i < numBalls; i++) {
+        a = {x: width*Math.random(), y: height*Math.random(), radius: 20, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5};
+        balls.push(a);
+        }      
+      gamestate = "playing";}
+
+    else if (gamestate === "playing") {
     if (reacting === false) {
       reacting = true
     // Find the mouse x and y relative to the top-left corner of the canvas
@@ -114,7 +141,7 @@ $(document).ready(function() {
       z = {x: x, y: y, radius: 0, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5, timer: 0};
       reactions.push(z);
 
-  }
+  }}
   });
 
   updateGame();
