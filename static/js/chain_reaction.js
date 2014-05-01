@@ -12,6 +12,10 @@ $(document).ready(function() {
   var balls = [];
 
   var reactions = [];
+
+  var reacting = false;
+
+  var numReacted = 0
   
   for (var i = 0; i < numBalls; i++) {
     a = {x: width*Math.random(), y: height*Math.random(), radius: 20, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5};
@@ -35,6 +39,7 @@ $(document).ready(function() {
           var new_reaction={x: balls[i].x, y: balls[i].y, radius: 1, timer: 0};
           reactions.push(new_reaction);
           balls.splice(i,1);
+          numReacted++;
           if (i>0) {
             i--;}
         }
@@ -93,19 +98,23 @@ $(document).ready(function() {
           i--;
       }
     }
-
+    context.fillStyle = "lime";
+    context.font = "20px Arial"
+    context.fillText("Reactions:" + numReacted, 10, 30);
   };
 
   // Handle a canvas click event
   $('#game_canvas').click(function(e) {
+    if (reacting === false) {
+      reacting = true
     // Find the mouse x and y relative to the top-left corner of the canvas
-    var x = e.pageX - $(this).offset().left;
-    var y = e.pageY - $(this).offset().top;
+      var x = e.pageX - $(this).offset().left;
+      var y = e.pageY - $(this).offset().top;
     
-    z = {x: x, y: y, radius: 0, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5, timer: 0};
-    reactions.push(z);
+      z = {x: x, y: y, radius: 0, vx: 2.5*Math.random()+2.5, vy: 2.5*Math.random()+2.5, timer: 0};
+      reactions.push(z);
 
-  
+  }
   });
 
   updateGame();
